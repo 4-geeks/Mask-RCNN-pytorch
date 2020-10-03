@@ -1,7 +1,9 @@
 import cv2
 import numpy as np
 import os
-from engine import train_one_epoch, evaluate
+import torch
+import utils.utils
+from utils.engine import train_one_epoch, evaluate
 from utils.dataset import maskrcnn_Dataset, get_transform
 from utils.model import get_instance_segmentation_model
 
@@ -26,11 +28,11 @@ print('number of test data :', len(dataset_test))
 # define training and validation data loaders
 data_loader = torch.utils.data.DataLoader(
     dataset, batch_size=4, shuffle=True, num_workers=4,
-    collate_fn=utils.collate_fn)
+    collate_fn=utils.utils.collate_fn)
 
 data_loader_test = torch.utils.data.DataLoader(
     dataset_test, batch_size=1, shuffle=False, num_workers=2,
-    collate_fn=utils.collate_fn)
+    collate_fn=utils.utils.collate_fn)
 
 
 # MASK-RCNN MODEL
