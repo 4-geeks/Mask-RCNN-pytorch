@@ -7,11 +7,12 @@ from utils.model import get_instance_segmentation_model
 
 num_classes = 11
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+DATASET_PATH = 'my_dataset'
 
 #DATASET
 # use our dataset and defined transformations
-dataset = maskrcnn_Dataset('holand_dataset/', get_transform(train=True))
-dataset_test = maskrcnn_Dataset('holand_dataset/', get_transform(train=False))
+dataset = maskrcnn_Dataset(DATASET_PATH, get_transform(train=True))
+dataset_test = maskrcnn_Dataset(DATASET_PATH, get_transform(train=False))
 
 # split the dataset in train and test set
 torch.manual_seed(1)
