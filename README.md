@@ -9,16 +9,14 @@ prepare your dataset in this format:
 ```
 my_dataset
       ├── JPEGImages
-      │       ├── file11.ext
-      │       └── file12.ext
+      │       ├── image1.jpg
+      │       └── image2.jpg
       │
       ├── SegmentationObject
-      │       ├── file21.ext
-      │       ├── file22.ext
-      │       └── file23.ext
+      │       ├── image1.png
+      │       └── image2.png
       │
       └── SegmentationClass
-              ├── file21.ext
-              ├── file22.ext
-              └── file23.ext
+              ├── image1.png
+              └── image2.png
 ```
