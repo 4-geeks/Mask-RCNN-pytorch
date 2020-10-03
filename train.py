@@ -1,3 +1,6 @@
+import cv2
+import numpy as np
+import os
 from engine import train_one_epoch, evaluate
 from utils.dataset import maskrcnn_Dataset, get_transform
 from utils.model import get_instance_segmentation_model
@@ -48,12 +51,13 @@ lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer,
 num_epochs = 150
 save_fr = 1
 print_freq = 25  # make sure that print_freq is smaller than len(dataset) & len(dataset_test)
+os.makedirs('./maskrcnn_saved_models', exist_ok=True)
 
 for epoch in range(num_epochs):
     # train for one epoch, printing every 10 iterations
     train_one_epoch(model, optimizer, data_loader, device, epoch, print_freq=print_freq)
     if epoch%save_fr == 0:
-      torch.save(model.state_dict(), './saved_seg_models/mask_rcnn_model_epoch_{}.pt'.format(str(epoch)))
+      torch.save(model.state_dict(), './maskrcnn_saved_models/mask_rcnn_model_epoch_{}.pt'.format(str(epoch)))
     # update the learning rate
     lr_scheduler.step()
     # evaluate on the test dataset
