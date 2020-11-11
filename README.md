@@ -26,7 +26,7 @@ Clone the repository and put ```my_dataset``` folder in ```Mask-RCNN-pytorch``` 
 ```
 $ python3 train.py --data my_dataset --num_classes 11 --num_epochs 150
 ```
-enter ```num_classes``` including background.
+Enter ```num_classes``` including background.
 
 ## Testing
 Enter your class names using ```classes``` variable in ```mask_rcnn.py``` then use this line of code to test on your image:
