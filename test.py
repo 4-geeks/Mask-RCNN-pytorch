@@ -3,13 +3,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mask_rcnn import *
 
-IMAGE_PATH = 'test_image.jpg'
-MODEL_PATH = './maskrcnn_saved_models/mask_rcnn_model_epoch_36.pt'
 
-image = cv2.imread(IMAGE_PATH)
-model = segmentation_model(MODEL_PATH)
-pred = model.detect_masks(image, rgb_image=False)   # rgb_image=False if loading image with cv2.imread()
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--img', type=str, default='test_image.jpg', help='path to your test image')
+    parser.add_argument('--model', type=str, default='./maskrcnn_saved_models/mask_rcnn_model.pt', help='path to saved model')
 
-plotted = plot_masks(image,pred)
-plt.figure(figsize=(16,12))
-plt.imshow(plotted)
+    args = parser.parse_args()
+
+    IMAGE_PATH = args.img
+    MODEL_PATH = args.model
+
+    image = cv2.imread(IMAGE_PATH)
+    model = segmentation_model(MODEL_PATH)
+    pred = model.detect_masks(image, rgb_image=False)   # rgb_image=False if loading image with cv2.imread()
+
+    plotted = plot_masks(image,pred)
+    plt.figure(figsize=(16,12))
+    plt.imshow(plotted)
+    plt.show()
