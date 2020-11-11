@@ -22,5 +22,14 @@ my_dataset
               └── image2.png
 ```
 
+Use this line of code to train
+```
+$ python3 train.py --data my_dataset --num_classes 11 --num_epochs 150
+```
+
 ## Testing
-Add your ```IMAGE_PATH``` and ```MODEL_PATH``` to ```test.py```  and enjoy!
+
+Use this line of code to test on your image
+```
+$ python3 test.py --img test_img.jpg --model ./maskrcnn_saved_models/mask_rcnn_model.pt
+```
