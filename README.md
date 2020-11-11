@@ -1,10 +1,9 @@
 # Mask-RCNN-pytorch
-Pytorch version of mask-rcnn based on torchvision model with VOC dataset format
+Pytorch implementation of mask-rcnn based on torchvision model with VOC dataset format. The model generates segmentation masks and their scores for each instance of an object in the image.
 
 ## Training
-To start training in your own dataset, in ```train.py```, add your VOC dataset path to ```DATASET_PATH``` variable.
 
-You can label your data with [labelme](https://github.com/wkentaro/labelme) and Export VOC-format dataset from json files with [labelme2voc](https://github.com/wkentaro/labelme/tree/master/examples/instance_segmentation).
+label your data with [labelme](https://github.com/wkentaro/labelme) and Export VOC-format dataset from json files with [labelme2voc](https://github.com/wkentaro/labelme/tree/master/examples/instance_segmentation).
 
 Prepare your dataset in this format:
 ```
@@ -21,15 +20,14 @@ my_dataset
               ├── image1.png
               └── image2.png
 ```
-
-Use this line of code to train
+Clone the repository and put ```my_dataset``` folder in ```Mask-RCNN-pytorch``` folder then use this line of code to train:
 ```
 $ python3 train.py --data my_dataset --num_classes 11 --num_epochs 150
 ```
+enter ```num_classes``` including background.
 
 ## Testing
-
-Use this line of code to test on your image
+Enter your class names using ```classes``` variable in ```mask_rcnn.py``` then use this line of code to test on your image:
 ```
 $ python3 test.py --img test_img.jpg --model ./maskrcnn_saved_models/mask_rcnn_model.pt
 ```
