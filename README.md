@@ -35,6 +35,5 @@ $ python3 test.py --img test_img.jpg --model ./maskrcnn_saved_models/mask_rcnn_m
 ```
 Here are some output reults:
 
-![res1](results/res1.png)
-![res2](results/res2.png)
+![res1](results/res1.png) | ![res2](results/res2.png)
 
