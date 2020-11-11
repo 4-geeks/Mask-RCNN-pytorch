@@ -37,8 +37,3 @@ Here are some output reults:
 
 ![res1](results/res1.png) | ![res2](results/res2.png)
 
-<p float="left">
-  <img src="results/res1.png" width="100" />
-  <img src="results/res2.png" width="100" /> 
-</p>
-
