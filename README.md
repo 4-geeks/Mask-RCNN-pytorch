@@ -1,7 +1,7 @@
 # Mask-RCNN-pytorch
 Pytorch implementation of [Mask-RCNN](https://arxiv.org/abs/1703.06870) based on torchvision model with VOC dataset format. The model generates segmentation masks and their scores for each instance of an object in the image. This repository is based on [TORCHVISION OBJECT DETECTION FINETUNING TUTORIAL](https://pytorch.org/tutorials/intermediate/torchvision_tutorial.html).
 
-![Network Structure](res/network_structure.png)
+![Network Structure](results/network_structure.png)
 
 ## Training
 
