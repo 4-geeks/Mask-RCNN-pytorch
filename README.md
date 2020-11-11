@@ -1,5 +1,5 @@
 # Mask-RCNN-pytorch
-Pytorch implementation of mask-rcnn based on torchvision model with VOC dataset format. The model generates segmentation masks and their scores for each instance of an object in the image.
+Pytorch implementation of [Mask-RCNN](https://arxiv.org/abs/1703.06870) based on torchvision model with VOC dataset format. The model generates segmentation masks and their scores for each instance of an object in the image.
 
 ## Training
 
