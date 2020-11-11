@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+import argparse
 from mask_rcnn import *
 
 
@@ -19,6 +20,10 @@ if __name__ == '__main__':
     pred = model.detect_masks(image, rgb_image=False)   # rgb_image=False if loading image with cv2.imread()
 
     plotted = plot_masks(image,pred)
+    
+    os.makedirs('./results', exist_ok=True)
+    cv2.imwrite('/results/res.jpg', plotted)
+
     plt.figure(figsize=(16,12))
     plt.imshow(plotted)
     plt.show()
