@@ -197,7 +197,9 @@ class MetricLogger(object):
             'data: {data}',
             'max mem: {memory:.0f}'
         ])
-        MB = 1024.0 * 1024.0
+        
+        memory =  torch.cuda.max_memory_allocated() / (1024.0 * 1024.0) if torch.cuda.is_available() else 0 
+            
         for obj in iterable:
             data_time.update(time.time() - end)
             yield obj
@@ -209,7 +211,7 @@ class MetricLogger(object):
                     i, len(iterable), eta=eta_string,
                     meters=str(self),
                     time=str(iter_time), data=str(data_time),
-                    memory=torch.cuda.max_memory_allocated() / MB))
+                    memory=memory))
             i += 1
             end = time.time()
         total_time = time.time() - start_time
