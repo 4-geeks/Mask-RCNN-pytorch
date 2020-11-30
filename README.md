@@ -35,7 +35,7 @@ Enter your class names using ```classes``` variable in ```mask_rcnn.py``` then u
 ```
 $ python3 test.py --img test_img.jpg --model ./maskrcnn_saved_models/mask_rcnn_model.pt
 ```
-Here are some output reults:
+Here are some output results:
 
 ![res1](results/res1.png) ![res2](results/res2.png)
 
