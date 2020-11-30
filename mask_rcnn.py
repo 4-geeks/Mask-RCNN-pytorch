@@ -12,20 +12,6 @@ import cv2
 import numpy as np
 
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-num_classes = 11
-
-classes = {0:'_background_',
-           1:'cover',
-           2:'remote',
-           3:'pen',
-           4:'newspaper',
-           5:'scissors',
-           6:'kettle',
-           7:'cup',
-           8:'bottle',
-           9:'image',
-           10:'text'}
-
 font = cv2.FONT_HERSHEY_SIMPLEX 
 fontScale = 2
 thickness = 3
@@ -47,11 +33,10 @@ def get_instance_segmentation_model(num_classes):
     model.roi_heads.mask_predictor = MaskRCNNPredictor(in_features_mask,
                                                        hidden_layer,
                                                        num_classes)
-
     return model
 
 class segmentation_model():
-    def __init__(self,model_path):
+    def __init__(self, model_path, num_classes):
         self.model = get_instance_segmentation_model(num_classes).to(device)
         self.model.load_state_dict(torch.load(model_path))
         self.model.eval()
@@ -64,7 +49,7 @@ class segmentation_model():
             prediction = self.model([img.to(device)])
         return prediction[0]
 
-def plot_masks(image, prediction):
+def plot_masks(image, prediction, classes):
     masks = prediction['masks'][:, 0].cpu().detach().numpy()[np.where(prediction['scores'].cpu().detach().numpy()>0.5)]
     masks[masks<0.5] = 0
     masks[masks>=0.5] = 1.0
