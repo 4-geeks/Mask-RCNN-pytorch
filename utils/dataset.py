@@ -4,7 +4,7 @@ import cv2
 import torch
 import torch.utils.data
 import utils.transforms as T
-
+from PIL import Image
 
 def get_transform(train):
     transforms = []
@@ -39,10 +39,11 @@ class maskrcnn_Dataset(torch.utils.data.Dataset):
         # note that we haven't converted the mask to RGB,
         # because each color corresponds to a different instance
         # with 0 being background
-#         mask = Image.open(mask_path)
+        # mask = Image.open(mask_path)
         
         mask = cv2.imread(mask_path,0)
-        class_mask = cv2.imread(class_mask_path,0)
+        class_mask = Image.open(class_mask_path).convert('P')
+        class_mask = np.asarray(class_mask)
         # instances are encoded as different colors
         obj_ids = np.unique(mask)
         # first id is the background, so remove it
