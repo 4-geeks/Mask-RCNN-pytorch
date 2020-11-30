@@ -10,6 +10,8 @@ label your data with [labelme](https://github.com/wkentaro/labelme) and Export V
 Prepare your dataset in this format:
 ```
 my_dataset
+      ├── labels.txt
+      │
       ├── JPEGImages
       │       ├── image1.jpg
       │       └── image2.jpg
