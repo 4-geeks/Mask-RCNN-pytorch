@@ -1,5 +1,3 @@
-import cv2
-import numpy as np
 import os
 import torch
 import argparse
@@ -13,15 +11,21 @@ from utils.model import get_instance_segmentation_model
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--data', type=str, default='my_dataset', help='dataset path')
-    parser.add_argument('--num_classes', type=str, default=11, help='number of classes (background as a class)')
-    parser.add_argument('--num_epochs', type=str, default=150, help='number of epochs')
-
-    args = parser.parse_args()
-
-    num_classes = args.num_classes
+    parser.add_argument('--num_classes', type=int, default=11, help='number of classes (background as a class)')
+    parser.add_argument('--num_epochs', type=int, default=150, help='number of epochs')
+    parser.add_argument('--batchsize', type=int, default=4, help='batchsize')
+    parser.add_argument('--workers', type=int, default=4, help='number of workers')
+    
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+    args = parser.parse_args()
+    
     DATASET_PATH = args.data
-
+    num_classes = args.num_classes
+    num_epochs = args.num_epochs
+    batchsize = args.batchsize
+    workers = args.workers
+    
+    
     #DATASET
     # use our dataset and defined transformations
     dataset = maskrcnn_Dataset(DATASET_PATH, get_transform(train=True))
@@ -38,11 +42,11 @@ if __name__ == '__main__':
 
     # define training and validation data loaders
     data_loader = torch.utils.data.DataLoader(
-        dataset, batch_size=4, shuffle=True, num_workers=4,
+        dataset, batch_size=batchsize, shuffle=True, num_workers=workers,
         collate_fn=utils.utils.collate_fn)
 
     data_loader_test = torch.utils.data.DataLoader(
-        dataset_test, batch_size=1, shuffle=False, num_workers=2,
+        dataset_test, batch_size=1, shuffle=False, num_workers=workers,
         collate_fn=utils.utils.collate_fn)
 
 
@@ -62,7 +66,7 @@ if __name__ == '__main__':
                                                 gamma=0.1)
 
     # TRAINING LOOP
-    num_epochs = args.num_epochs
+    
     save_fr = 1
     print_freq = 25  # make sure that print_freq is smaller than len(dataset) & len(dataset_test)
     os.makedirs('./maskrcnn_saved_models', exist_ok=True)
