@@ -49,12 +49,12 @@ class segmentation_model():
             prediction = self.model([img.to(device)])
         return prediction[0]
 
-def plot_masks(image, prediction, classes):
-    masks = prediction['masks'][:, 0].cpu().detach().numpy()[np.where(prediction['scores'].cpu().detach().numpy()>0.5)]
-    masks[masks<0.5] = 0
-    masks[masks>=0.5] = 1.0
-    labels = prediction['labels'].cpu().numpy()[np.where(prediction['scores'].cpu().detach().numpy()>0.5)]
-    scores = np.round(prediction['scores'].cpu().detach().numpy()[np.where(prediction['scores'].cpu().detach().numpy()>0.5)],2)
+def plot_masks(image, prediction, classes, th=.2):
+    masks = prediction['masks'][:, 0].cpu().detach().numpy()[np.where(prediction['scores'].cpu().detach().numpy()>th)]
+    masks[masks<th] = 0
+    masks[masks>=th] = 1.0
+    labels = prediction['labels'].cpu().numpy()[np.where(prediction['scores'].cpu().detach().numpy()>th)]
+    scores = np.round(prediction['scores'].cpu().detach().numpy()[np.where(prediction['scores'].cpu().detach().numpy()>th)],2)
 
     copy_image = image.copy()
     alpha = 0.5

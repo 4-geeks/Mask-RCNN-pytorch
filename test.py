@@ -32,7 +32,7 @@ if __name__ == '__main__':
     plotted = plot_masks(image,pred,classes)
     
     os.makedirs('./results', exist_ok=True)
-    cv2.imwrite('/results/res.jpg', plotted)
+    cv2.imwrite('./results/res.jpg', plotted)
 
     plt.figure(figsize=(16,12))
     plt.imshow(plotted)
